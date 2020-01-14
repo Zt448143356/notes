@@ -1,0 +1,182 @@
+一、JAVA开发环境
+	1.java编译运行过程：
+		1.1 编译期：java源文件，经过编译（javac）生成class字节码文件
+		1.2 运行期：JVM加载.clss并运行.class
+	2.名词解释：
+		2.1 JVM：java虚拟机（加载.class并运行.class）
+		2.2 JRE：java运行环境（包含JVM+系统类库（系统类库）（运行java程序所必须的环境））
+		2.3 JDk：java开发工具包（包含JRE+开发java程序锁必须的编译，运行等命令工具）JDK=JRE+编译、运行等命令工具
+		运行java程序的最小环境为JRE   开发java程序的最小环境为JDK
+	3设置系统环境变量：
+		1.新建：JAVA_HOME（就是电脑JDK的位置）
+		2.新建CLASSPATH (.)或者(.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;)
+		3.Path（按Home回到最前面）加(%JAVA_HOME%\bin;)
+		4.检查环境：win+R  cmd java -version（检查JDK版本）
+		5.检查是否安装完成 按照4操作输入java和javac都出现即为安装完毕
+二、变量：存数的
+	1.声明： int a；//声明一个整型的变量，名为a；
+	2.命名：
+		2.1 只能包含字母、数字、“_”和$（不能以数字开头）
+		2.2 严格区分大小写
+		2.3 不能使用关键字
+		2.4 可以中文命名但不建议
+		建议：英文的见名知意、驼峰命名法
+		int socre,myScore,myJavaScore		//驼峰命名法（第一个首字母小写之后首字母大写）主要运用变量
+		int Score,MyScore,MyJaveScore		//帕斯卡命名法（首字母都大写）主要运用在类上
+	3.初始化：第一次赋值
+		3.1 声明的同时初始化：int a=25;		//声明整形变量a并赋值为25
+		3.2 先声明后初始化： int a;	a=25;
+	4.使用：
+		4.1 对变量的操作就是对它所存的数的操作
+		4.2 变量的操作必须与数据类型匹配 int a=3.14;	//编译错误，数据类型不匹配
+		4.3 变量在使用之前必须声明并初始化
+三、基本数据类型：
+	1.int：		整型，4个字节
+			整数直接默认为int，超范围编译错误
+			俩数相除，结果为整数，小数无条件舍弃
+			运算时超范围，发生溢出，要避免
+	2.long：	长整型，8字节
+			长整型直接量，需要在数字后面加L或者l
+			运算时若有可能溢出建议在第一个数字后面L
+			System.currentTimeMillis()用于获取自1970.1.1的0时到此时刻的毫秒数
+	3.bouble：	浮点型，8字节
+			double在运算是会出现舍入误差（精确场合不用）
+	4.boolean：	布尔型，1字节
+			只能存储ture和false
+	5.char：	字符型，2字节
+			采用unicode编码格式，每个字符char对应一个码(0~65536)('a'——97,'A'——65)
+			字符必须放在单引号中，只能有一个
+			特殊符号需通过'\'来转义
+	6.floa最后加f；byte；short
+四、基本数据问题转换
+	1.俩种方式：（小->大）byte，char，short，int，long，float，double
+		1.1 自动类型转换：小类型到大类型
+		1.2 强制类型转换：大类型到小类型  语法：（要转换的类型）变量（有可能出现溢出或者丢失精度）
+	2.俩点规则：
+		2.1 整数直接量可以直接赋给byte，short，char（但是不能超出范围）
+		2.2 byte，short，char类型数据运算时一律先转化为int在运算
+			byte b1=5;√
+			byte b2=6;√
+			byte b3=b1+b2l;×（需要强制转换，b1+b2类型为int不能直接赋给byte类型的b3）
+五、Scanner的用法：给变量赋值的三种方法
+	1. 赋一个固定的值 int a=5;
+	2.接受用户输如的值 int a=?;
+		2.1 在package下：
+		import java.util.Scanner;
+		2.2 在main方法中：
+		Scanner 变量（scan）=new Scanner(System.in)
+		2.3 在2.2的步骤下：
+		int age= scan.nextInt();
+	3.系统随机生成的值
+六、运算符：
+	1.算术运算符：
+		1.1 “%”取模：取余数，余数为0为整除
+		1.2 ++，--，自增，自减，可在变量前后
+	2.关系运算符：
+		2.1 >（大于），<（小于），>=（大于等于），<=（小于等于），==（等于），!=（不等于）
+		2.2 结果为boolean型（成立true）（不成立false）
+	3.逻辑运算符：
+		3.1 &&“短路与”————俩者都真才是真（若前者为假后者不执行）
+		3.2 ||“短路或”————一个为真就为真（前者为真后者就不执行）
+		3.3 !“非”————取反，真变假，假变真
+	4.赋值运算符
+		4.1 简单赋值运算符“=”
+		4.2 拓展运算符：+=，-=，*=，/=
+	5.字符串连接运算符：
+		5.1 +：若俩边都是数字作为加法运算
+		       若俩边出现字符做字符串连接
+		       char字符，单引号（仅一个）		string字符串，双引号（可0可多个）
+		       （10+20+""+30）//"3030"字符串
+		       （10+20+30+""）//"60"字符串
+		       （""+10+20+30）//"102030"字符串
+	6.三目运算符
+		6.1 语法：int max=a>b?a:b;
+七、三种结构：
+	1.顺序：从上到下逐步执行
+	2.分支：根据条件执行
+	if（）{
+	}
+	else if(){
+	}
+	else{
+	}
+	
+
+	switch(){
+		case 1:.......break;
+		case 2:.......break;
+		default......
+	}
+	3.循环
+	for(;;)
+	do
+	{
+
+	}while()
+	while()
+	{
+	}
+八、数组声明
+	// 1.方式一  声明 分配空间并赋值
+	int[] arr1 = {1,2,3};
+	// 2.方式二 显示初始化
+	int[] arr2;
+	arr2 = new int[]{1,2,3};
+	// 3.方式三 显示初始化()
+	int[] arr3;
+	arr3 = new int[3];
+
+	//方式一：在声明的时候直接就已经分配空间，并赋值，方式一是不能写成如下这种形式的。
+	int[] arr1;  
+	arr1 = {1,2,3};//错误写法 编译不同过
+	//方式二和方式三,声明和内存分配是分开的，如
+	int[] arr2;  和  int[] arr3; 
+	//这一步是在栈空间分配一个引用，存放的是一个引用，null
+	arr2 = new int[]{1,2,3}; arr3 = new int[3];
+九、操作数据库
+	//确定用使用哪个数据库？
+	Class.forName("要操作的数据库的驱动类");
+	//连接这个数据库得到连接对象.url,username,password
+	Connection conn=DriverManager.getConnection("地址","数据库账号","数据库密码");
+	//必须要有一个执行sql语句的对象
+	PreparedStatement pstmt=conn.prepareStatement(sql);
+	//执行sql语句
+	pstmt.executeUpdate();		
+
+
+		// 连接对象
+		Connection conn = null;
+		// 执行语句对象
+		PreparedStatement pstmt = null;
+		try {
+			// 确定用使用哪个数据库？
+			Class.forName("com.mysql.jdbc.Driver");
+			// 连接这个数据库得到连接对象.url,username,password
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zm", "root", "root");
+
+			String sql = "update zm.user set userName=?,password=? where userId=?";
+			// 必须要有一个执行sql语句的对象
+			pstmt = conn.prepareStatement(sql);
+			// 为三个问号赋值
+			pstmt.setString(1, "234");
+			pstmt.setString(2, "1234");
+			pstmt.setInt(3, 3);
+			// 执行sql语句executeUpdate()方法可以执行，增删改的sql语句
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+十、通过继承优化
+
+
+
+
+
+
+
+
+
+
+
+
+

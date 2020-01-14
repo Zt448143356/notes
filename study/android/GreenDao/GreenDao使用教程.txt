@@ -1,0 +1,261 @@
+一.GreenDao特点
+	性能最大化，可能是Android平台上最快的ORM框架 
+	易于使用的API 
+	最小的内存开销 
+	依赖体积小 
+	支持数据库加密 
+	强大的社区支持
+
+
+二.GreenDao配置
+// In your root build.gradle file:
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral() // add repository
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+
+	// NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+    
+
+
+
+// In your app projects build.gradle file:
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+ 
+
+greendao {
+    schemaVersion 1  //数据库版本号
+    daoPackage '生成文件包名' // 一般为app包名+生成文件的文件夹名
+    //如daoPackage 'gen'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java' //生成文件路径//设置DaoMaster、DaoSession、Dao目录
+    //targetGenDirTest：设置生成单元测试目录
+    //generateTests：设置自动生成单元测试用例
+}
+//schemaVersion：数据库模式的当前版本。这是使用的 * OpenHelpers类模式版本之间迁移。如果更改实体/数据库架构，则必须增加此值。默认为1。
+//daoPackage：生成的DAO，DaoMaster和DaoSession的包名。 默认为源实体的包名称。
+//targetGenDir：应存储生成的源的位置。 默认为构建目录（ build / generated / source / greendao）中生成的源文件夹。
+//generateTests：  设置为true以自动生成单元测试。
+//targetGenDirTests：  应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
+dependencies {
+    implementation 'org.greenrobot:greendao:3.2.0' // add library
+}
+
+
+
+
+三.在项目中创建一个包名为entity的包，然后在里面创建你的实体类，比如User类（基本在java目录下）
+
+
+@Entity
+public class User {
+    @Id(autoincrement = true)
+    private Long id;
+ 
+    @Property(nameInDb = "USERNAME")
+    private String name;
+ 
+    @NotNull
+    private int repos;
+ 
+    @Transient
+    private int tempUsageCount;
+ 
+}
+
+（仅仅支持java类）
+@Entity注释将Java类用户转换为数据库支持的实体（就是实体类前必须加 @Entity）
+@Id注释选择long/ long属性作为实体ID。在数据库术语中，它是主键。参数autoincrement是一个标记，用于使ID值不断增加(而不是重用旧值)。（目前，实体的主键必须是long或long属性。）
+@Property允许您定义一个非默认列名，将属性映射到该列名。如果没有，greenDAO将以类似sql的方式使用字段名(大写、下划线而不是驼峰大小写，例如customName将变成CUSTOM_NAME)。注意:目前只能使用内联常量来指定列名。
+@NotNull使属性成为数据库端的“NOT NULL”列。通常，用 @NotNull标记基本类型(long 、int、short、byte)是有意义的，而用包装类(long、Integer、short、byte)标记可空值是有意义的。
+@Transient标记属性将被排除在持久性之外。也可以使用Java中的transient关键字。
+
+然后ctrl+f9（make project）在targetGenDir设置的目录下生成名为gen(daoPackage设置的）的包，并在此包下生成DaoMaster、DaoSession、Dao
+
+
+四.分层
+
+
+1.在Acivity的同层包下创建一个包（包名为dbmanager）
+2.在dbmanager下创建俩个class分别为（CommonUtils）（DaoManager）
+3.Daomanager内容为：
+{
+	import android.content.Context;
+
+	import org.greenrobot.greendao.query.QueryBuilder;
+
+	import gen.DaoMaster;
+	import gen.DaoSession;
+
+	/**
+	 * 1.创建数据库
+	 * 2.创建数据库的表
+	 * 3.包含对数据库的CRUD（增删查改）
+	 * 4.对数据库的升级
+	 */
+	public class DaoManager {
+	    private static final String TAG = DaoManager.class.getSimpleName();
+	    private static final String DB_NAME="mydb.sqlite";//数据库名称
+	    private volatile static DaoManager manager;//多线程访问
+	    private static DaoMaster.DevOpenHelper helper;
+	    private static DaoMaster daoMaster;
+	    private static DaoSession daoSession;
+	    private Context context;
+
+	    /**
+	     * 使用单例模式获得操作数据库的对象
+	     * @return
+	     */
+	    public static DaoManager getInstance(){
+		DaoManager instance = null;
+		if (manager==null){
+		    synchronized (DaoManager.class){
+			if (instance==null){
+			    instance = new DaoManager();
+			    manager = instance;
+			}
+		    }
+		}
+		return instance;
+	    }
+
+	    public void init(Context context){
+		this.context = context;
+	    }
+	    /**
+	     * 判断是否存在数据库，如果没有则创建数据库
+	     * @return
+	     */
+	    public DaoMaster getDaoMaster(){
+		if(daoMaster==null){
+		    DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context,DB_NAME,null);
+		    daoMaster = new DaoMaster(helper.getWritableDatabase());
+		}
+		return daoMaster;
+	    }
+
+	    /**
+	     * 完成对数据库的添加，删除，修改，查询的操作，仅仅是一个接口
+	     * @return
+	     */
+	    public DaoSession getDaoSession(){
+		if(daoSession==null){
+		    if (daoMaster==null){
+			daoMaster = getDaoMaster();
+		    }
+		    daoSession = daoMaster.newSession();
+		}
+		return daoSession;
+	    }
+
+	    /**
+	     * 打开输出日志的操作，默认是关闭的
+	     */
+	    public void setDebug(){
+		QueryBuilder.LOG_SQL = true;
+		QueryBuilder.LOG_VALUES = true;
+	    }
+
+	    /**
+	     * 关闭所有的操作，数据库开启的时候，使用完毕了必须要关闭，否则会造成资源的浪费
+	     */
+	    public void closeConnection(){
+		closeHeloper();
+		closeDaoSession();
+	    }
+	    public void closeHeloper(){
+		if(helper!=null){
+		    helper.close();
+		    helper=null;
+		}
+	    }
+	    public void closeDaoSession(){
+		if(daoSession!=null){
+		    daoSession.clear();
+		    daoSession=null;
+		}
+	    }
+	}
+}
+
+4.CommonUtils内容为需要对数据库操作什么就在其中写什么内容如：
+{
+	import android.content.Context;
+	import android.util.Log;
+
+	import java.util.List;
+
+	import entity.User;
+
+	/**
+	 * 完成对某一张表的具体操作，ORM 操作的是对象，User
+	 */
+	public class CommonUtils {
+	    private DaoManager manager;
+
+	    public CommonUtils(Context context) {
+		manager = DaoManager.getInstance();
+		manager.init(context);
+	    }
+
+	    /**
+	     * 完成对数据库中user 表的插入操作
+	     * @param user
+	     * @return
+	     */
+	    public boolean insertUsr(User user) {
+		boolean flag = false;
+		flag = manager.getDaoSession().insert(user) != -1 ? true: false;
+		Log.i("CommonUtils","------insertUser---result is -->>"+flag);
+		return flag;
+	    }
+
+	    /**
+	     * 插入多条记录，需要开辟新的线程
+	     * @param users
+	     * @return
+	     */
+	    public boolean insertMultUser(final List<User> users){
+		boolean flag = false;
+
+		try {
+		    manager.getDaoSession().runInTx(new Runnable() {
+			@Override
+			public void run() {
+			    for(User user:users) {
+				manager.getDaoSession().insertOrReplace(user);
+			    }
+			}
+		    });
+		}catch (Exception e){
+		    e.printStackTrace();
+		}
+		return flag;
+	    }
+
+	    /**
+	     * 完成对User的某一条记录的修改
+	     * @param user
+	     * @return
+	     */
+	    public boolean updataUser(User user){
+		boolean flag=false;
+		try{
+		    manager.getDaoSession().update(user);
+		    flag=true;
+		}catch(Exception e){
+		    e.printStackTrace();
+		}
+	       return flag;
+	    }
+	}
+}
+
+
