@@ -10,10 +10,10 @@ module.exports = {
         open: true,
         proxy: {
             '/dev': {
-                target: `http://127.0.0.1:8082/`,
-                changeOrigin: true,
+                target: `http://127.0.0.1:8082/`,//代理地址
+                changeOrigin: true,//如果设置成true：发送请求头中host会设置成target
                 pathRewrite: {
-                    '^/dev': ''
+                    '^/dev': ''//把/dev换成''
                 }
             }
         }
