@@ -3436,6 +3436,34 @@ var parent = swf.parent(); // 获得Swift的上层节点<ul>
 var a = swf.parent('.red'); // 获得Swift的上层节点<ul>，同时传入过滤条件。如果ul不符合条件，返回空jQuery对象
 ```
 
+# JavaScript使用添加
+
+## js操作localstorage
+
++ localStorage 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去删除。
++ 关闭浏览器数据不会被删除
+
+``` JS
+    //获取
+    let temp = window.localStorage.getItem(key);
+    //设置
+    window.localStorage.setItem(key, value);
+    //移除
+    window.localStorage.removeItem(key);
+```
+
++ Vue中使用
+
+``` JS
+let temp = localStorage.getItem(key);
+其他相同，去掉window
+```
+
+
+
+
+
+
 ``` JavaScript
 
 ```
@@ -3517,4 +3545,6 @@ var a = swf.parent('.red'); // 获得Swift的上层节点<ul>，同时传入过�
 ```
 
 1
+
+
 
