@@ -107,6 +107,29 @@
 
 * `git merge test` 把test分支合并到当前所在的分支中会发生冲突，解决冲突即可。
 
+### `git branch -a`
+
+* `git branch -a` 查看本地分支和远程分支情况 
+
+![branch1](images/branch1.png '')
+
+下面部分为操作前的
+
+![branch1_1](images/branch1_1.png)
+
+### `git remote show origin`
+
+* `git remote show origin` 查看本地分支和追踪情况
+
+![branch2](images/branch2.png)
+
+### `git remote prune origin`
+
+* `git remote prune origin` 删除本地库中云端的分支
+
+![branch3](images/branch3.png)
+
+
 ## 日志
 
 ### `git log` 
