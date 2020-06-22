@@ -1,13 +1,13 @@
-Ò».GreenDaoÌØµã
-	ĞÔÄÜ×î´ó»¯£¬¿ÉÄÜÊÇAndroidÆ½Ì¨ÉÏ×î¿ìµÄORM¿ò¼Ü 
-	Ò×ÓÚÊ¹ÓÃµÄAPI 
-	×îĞ¡µÄÄÚ´æ¿ªÏú 
-	ÒÀÀµÌå»ıĞ¡ 
-	Ö§³ÖÊı¾İ¿â¼ÓÃÜ 
-	Ç¿´óµÄÉçÇøÖ§³Ö
+ä¸€.GreenDaoç‰¹ç‚¹
+	æ€§èƒ½æœ€å¤§åŒ–ï¼Œå¯èƒ½æ˜¯Androidå¹³å°ä¸Šæœ€å¿«çš„ORMæ¡†æ¶ 
+	æ˜“äºä½¿ç”¨çš„API 
+	æœ€å°çš„å†…å­˜å¼€é”€ 
+	ä¾èµ–ä½“ç§¯å° 
+	æ”¯æŒæ•°æ®åº“åŠ å¯† 
+	å¼ºå¤§çš„ç¤¾åŒºæ”¯æŒ
 
 
-¶ş.GreenDaoÅäÖÃ
+äºŒ.GreenDaoé…ç½®
 // In your root build.gradle file:
 buildscript {
     repositories {
@@ -32,18 +32,18 @@ apply plugin: 'org.greenrobot.greendao' // apply plugin
  
 
 greendao {
-    schemaVersion 1  //Êı¾İ¿â°æ±¾ºÅ
-    daoPackage 'Éú³ÉÎÄ¼ş°üÃû' // Ò»°ãÎªapp°üÃû+Éú³ÉÎÄ¼şµÄÎÄ¼ş¼ĞÃû
-    //ÈçdaoPackage 'gen'//ÉèÖÃDaoMaster¡¢DaoSession¡¢Dao°üÃû
-    targetGenDir 'src/main/java' //Éú³ÉÎÄ¼şÂ·¾¶//ÉèÖÃDaoMaster¡¢DaoSession¡¢DaoÄ¿Â¼
-    //targetGenDirTest£ºÉèÖÃÉú³Éµ¥Ôª²âÊÔÄ¿Â¼
-    //generateTests£ºÉèÖÃ×Ô¶¯Éú³Éµ¥Ôª²âÊÔÓÃÀı
+    schemaVersion 1  //æ•°æ®åº“ç‰ˆæœ¬å·
+    daoPackage 'ç”Ÿæˆæ–‡ä»¶åŒ…å' // ä¸€èˆ¬ä¸ºappåŒ…å+ç”Ÿæˆæ–‡ä»¶çš„æ–‡ä»¶å¤¹å
+    //å¦‚daoPackage 'gen'//è®¾ç½®DaoMasterã€DaoSessionã€DaoåŒ…å
+    targetGenDir 'src/main/java' //ç”Ÿæˆæ–‡ä»¶è·¯å¾„//è®¾ç½®DaoMasterã€DaoSessionã€Daoç›®å½•
+    //targetGenDirTestï¼šè®¾ç½®ç”Ÿæˆå•å…ƒæµ‹è¯•ç›®å½•
+    //generateTestsï¼šè®¾ç½®è‡ªåŠ¨ç”Ÿæˆå•å…ƒæµ‹è¯•ç”¨ä¾‹
 }
-//schemaVersion£ºÊı¾İ¿âÄ£Ê½µÄµ±Ç°°æ±¾¡£ÕâÊÇÊ¹ÓÃµÄ * OpenHelpersÀàÄ£Ê½°æ±¾Ö®¼äÇ¨ÒÆ¡£Èç¹û¸ü¸ÄÊµÌå/Êı¾İ¿â¼Ü¹¹£¬Ôò±ØĞëÔö¼Ó´ËÖµ¡£Ä¬ÈÏÎª1¡£
-//daoPackage£ºÉú³ÉµÄDAO£¬DaoMasterºÍDaoSessionµÄ°üÃû¡£ Ä¬ÈÏÎªÔ´ÊµÌåµÄ°üÃû³Æ¡£
-//targetGenDir£ºÓ¦´æ´¢Éú³ÉµÄÔ´µÄÎ»ÖÃ¡£ Ä¬ÈÏÎª¹¹½¨Ä¿Â¼£¨ build / generated / source / greendao£©ÖĞÉú³ÉµÄÔ´ÎÄ¼ş¼Ğ¡£
-//generateTests£º  ÉèÖÃÎªtrueÒÔ×Ô¶¯Éú³Éµ¥Ôª²âÊÔ¡£
-//targetGenDirTests£º  Ó¦´æ´¢Éú³ÉµÄµ¥Ôª²âÊÔµÄ»ù±¾Ä¿Â¼¡£Ä¬ÈÏÎª src / androidTest / java¡£
+//schemaVersionï¼šæ•°æ®åº“æ¨¡å¼çš„å½“å‰ç‰ˆæœ¬ã€‚è¿™æ˜¯ä½¿ç”¨çš„ * OpenHelpersç±»æ¨¡å¼ç‰ˆæœ¬ä¹‹é—´è¿ç§»ã€‚å¦‚æœæ›´æ”¹å®ä½“/æ•°æ®åº“æ¶æ„ï¼Œåˆ™å¿…é¡»å¢åŠ æ­¤å€¼ã€‚é»˜è®¤ä¸º1ã€‚
+//daoPackageï¼šç”Ÿæˆçš„DAOï¼ŒDaoMasterå’ŒDaoSessionçš„åŒ…åã€‚ é»˜è®¤ä¸ºæºå®ä½“çš„åŒ…åç§°ã€‚
+//targetGenDirï¼šåº”å­˜å‚¨ç”Ÿæˆçš„æºçš„ä½ç½®ã€‚ é»˜è®¤ä¸ºæ„å»ºç›®å½•ï¼ˆ build / generated / source / greendaoï¼‰ä¸­ç”Ÿæˆçš„æºæ–‡ä»¶å¤¹ã€‚
+//generateTestsï¼š  è®¾ç½®ä¸ºtrueä»¥è‡ªåŠ¨ç”Ÿæˆå•å…ƒæµ‹è¯•ã€‚
+//targetGenDirTestsï¼š  åº”å­˜å‚¨ç”Ÿæˆçš„å•å…ƒæµ‹è¯•çš„åŸºæœ¬ç›®å½•ã€‚é»˜è®¤ä¸º src / androidTest / javaã€‚
 dependencies {
     implementation 'org.greenrobot:greendao:3.2.0' // add library
 }
@@ -51,7 +51,7 @@ dependencies {
 
 
 
-Èı.ÔÚÏîÄ¿ÖĞ´´½¨Ò»¸ö°üÃûÎªentityµÄ°ü£¬È»ºóÔÚÀïÃæ´´½¨ÄãµÄÊµÌåÀà£¬±ÈÈçUserÀà£¨»ù±¾ÔÚjavaÄ¿Â¼ÏÂ£©
+ä¸‰.åœ¨é¡¹ç›®ä¸­åˆ›å»ºä¸€ä¸ªåŒ…åä¸ºentityçš„åŒ…ï¼Œç„¶ååœ¨é‡Œé¢åˆ›å»ºä½ çš„å®ä½“ç±»ï¼Œæ¯”å¦‚Userç±»ï¼ˆåŸºæœ¬åœ¨javaç›®å½•ä¸‹ï¼‰
 
 
 @Entity
@@ -70,22 +70,22 @@ public class User {
  
 }
 
-£¨½ö½öÖ§³ÖjavaÀà£©
-@Entity×¢ÊÍ½«JavaÀàÓÃ»§×ª»»ÎªÊı¾İ¿âÖ§³ÖµÄÊµÌå£¨¾ÍÊÇÊµÌåÀàÇ°±ØĞë¼Ó @Entity£©
-@Id×¢ÊÍÑ¡Ôñlong/ longÊôĞÔ×÷ÎªÊµÌåID¡£ÔÚÊı¾İ¿âÊõÓïÖĞ£¬ËüÊÇÖ÷¼ü¡£²ÎÊıautoincrementÊÇÒ»¸ö±ê¼Ç£¬ÓÃÓÚÊ¹IDÖµ²»¶ÏÔö¼Ó(¶ø²»ÊÇÖØÓÃ¾ÉÖµ)¡££¨Ä¿Ç°£¬ÊµÌåµÄÖ÷¼ü±ØĞëÊÇlong»òlongÊôĞÔ¡££©
-@PropertyÔÊĞíÄú¶¨ÒåÒ»¸ö·ÇÄ¬ÈÏÁĞÃû£¬½«ÊôĞÔÓ³Éäµ½¸ÃÁĞÃû¡£Èç¹ûÃ»ÓĞ£¬greenDAO½«ÒÔÀàËÆsqlµÄ·½Ê½Ê¹ÓÃ×Ö¶ÎÃû(´óĞ´¡¢ÏÂ»®Ïß¶ø²»ÊÇÍÕ·å´óĞ¡Ğ´£¬ÀıÈçcustomName½«±ä³ÉCUSTOM_NAME)¡£×¢Òâ:Ä¿Ç°Ö»ÄÜÊ¹ÓÃÄÚÁª³£Á¿À´Ö¸¶¨ÁĞÃû¡£
-@NotNullÊ¹ÊôĞÔ³ÉÎªÊı¾İ¿â¶ËµÄ¡°NOT NULL¡±ÁĞ¡£Í¨³££¬ÓÃ @NotNull±ê¼Ç»ù±¾ÀàĞÍ(long ¡¢int¡¢short¡¢byte)ÊÇÓĞÒâÒåµÄ£¬¶øÓÃ°ü×°Àà(long¡¢Integer¡¢short¡¢byte)±ê¼Ç¿É¿ÕÖµÊÇÓĞÒâÒåµÄ¡£
-@Transient±ê¼ÇÊôĞÔ½«±»ÅÅ³ıÔÚ³Ö¾ÃĞÔÖ®Íâ¡£Ò²¿ÉÒÔÊ¹ÓÃJavaÖĞµÄtransient¹Ø¼ü×Ö¡£
+ï¼ˆä»…ä»…æ”¯æŒjavaç±»ï¼‰
+@Entityæ³¨é‡Šå°†Javaç±»ç”¨æˆ·è½¬æ¢ä¸ºæ•°æ®åº“æ”¯æŒçš„å®ä½“ï¼ˆå°±æ˜¯å®ä½“ç±»å‰å¿…é¡»åŠ  @Entityï¼‰
+@Idæ³¨é‡Šé€‰æ‹©long/ longå±æ€§ä½œä¸ºå®ä½“IDã€‚åœ¨æ•°æ®åº“æœ¯è¯­ä¸­ï¼Œå®ƒæ˜¯ä¸»é”®ã€‚å‚æ•°autoincrementæ˜¯ä¸€ä¸ªæ ‡è®°ï¼Œç”¨äºä½¿IDå€¼ä¸æ–­å¢åŠ (è€Œä¸æ˜¯é‡ç”¨æ—§å€¼)ã€‚ï¼ˆç›®å‰ï¼Œå®ä½“çš„ä¸»é”®å¿…é¡»æ˜¯longæˆ–longå±æ€§ã€‚ï¼‰
+@Propertyå…è®¸æ‚¨å®šä¹‰ä¸€ä¸ªéé»˜è®¤åˆ—åï¼Œå°†å±æ€§æ˜ å°„åˆ°è¯¥åˆ—åã€‚å¦‚æœæ²¡æœ‰ï¼ŒgreenDAOå°†ä»¥ç±»ä¼¼sqlçš„æ–¹å¼ä½¿ç”¨å­—æ®µå(å¤§å†™ã€ä¸‹åˆ’çº¿è€Œä¸æ˜¯é©¼å³°å¤§å°å†™ï¼Œä¾‹å¦‚customNameå°†å˜æˆCUSTOM_NAME)ã€‚æ³¨æ„:ç›®å‰åªèƒ½ä½¿ç”¨å†…è”å¸¸é‡æ¥æŒ‡å®šåˆ—åã€‚
+@NotNullä½¿å±æ€§æˆä¸ºæ•°æ®åº“ç«¯çš„â€œNOT NULLâ€åˆ—ã€‚é€šå¸¸ï¼Œç”¨ @NotNullæ ‡è®°åŸºæœ¬ç±»å‹(long ã€intã€shortã€byte)æ˜¯æœ‰æ„ä¹‰çš„ï¼Œè€Œç”¨åŒ…è£…ç±»(longã€Integerã€shortã€byte)æ ‡è®°å¯ç©ºå€¼æ˜¯æœ‰æ„ä¹‰çš„ã€‚
+@Transientæ ‡è®°å±æ€§å°†è¢«æ’é™¤åœ¨æŒä¹…æ€§ä¹‹å¤–ã€‚ä¹Ÿå¯ä»¥ä½¿ç”¨Javaä¸­çš„transientå…³é”®å­—ã€‚
 
-È»ºóctrl+f9£¨make project£©ÔÚtargetGenDirÉèÖÃµÄÄ¿Â¼ÏÂÉú³ÉÃûÎªgen(daoPackageÉèÖÃµÄ£©µÄ°ü£¬²¢ÔÚ´Ë°üÏÂÉú³ÉDaoMaster¡¢DaoSession¡¢Dao
-
-
-ËÄ.·Ö²ã
+ç„¶åctrl+f9ï¼ˆmake projectï¼‰åœ¨targetGenDirè®¾ç½®çš„ç›®å½•ä¸‹ç”Ÿæˆåä¸ºgen(daoPackageè®¾ç½®çš„ï¼‰çš„åŒ…ï¼Œå¹¶åœ¨æ­¤åŒ…ä¸‹ç”ŸæˆDaoMasterã€DaoSessionã€Dao
 
 
-1.ÔÚAcivityµÄÍ¬²ã°üÏÂ´´½¨Ò»¸ö°ü£¨°üÃûÎªdbmanager£©
-2.ÔÚdbmanagerÏÂ´´½¨Á©¸öclass·Ö±ğÎª£¨CommonUtils£©£¨DaoManager£©
-3.DaomanagerÄÚÈİÎª£º
+å››.åˆ†å±‚
+
+
+1.åœ¨Acivityçš„åŒå±‚åŒ…ä¸‹åˆ›å»ºä¸€ä¸ªåŒ…ï¼ˆåŒ…åä¸ºdbmanagerï¼‰
+2.åœ¨dbmanagerä¸‹åˆ›å»ºä¿©ä¸ªclassåˆ†åˆ«ä¸ºï¼ˆCommonUtilsï¼‰ï¼ˆDaoManagerï¼‰
+3.Daomanagerå†…å®¹ä¸ºï¼š
 {
 	import android.content.Context;
 
@@ -95,22 +95,22 @@ public class User {
 	import gen.DaoSession;
 
 	/**
-	 * 1.´´½¨Êı¾İ¿â
-	 * 2.´´½¨Êı¾İ¿âµÄ±í
-	 * 3.°üº¬¶ÔÊı¾İ¿âµÄCRUD£¨ÔöÉ¾²é¸Ä£©
-	 * 4.¶ÔÊı¾İ¿âµÄÉı¼¶
+	 * 1.åˆ›å»ºæ•°æ®åº“
+	 * 2.åˆ›å»ºæ•°æ®åº“çš„è¡¨
+	 * 3.åŒ…å«å¯¹æ•°æ®åº“çš„CRUDï¼ˆå¢åˆ æŸ¥æ”¹ï¼‰
+	 * 4.å¯¹æ•°æ®åº“çš„å‡çº§
 	 */
 	public class DaoManager {
 	    private static final String TAG = DaoManager.class.getSimpleName();
-	    private static final String DB_NAME="mydb.sqlite";//Êı¾İ¿âÃû³Æ
-	    private volatile static DaoManager manager;//¶àÏß³Ì·ÃÎÊ
+	    private static final String DB_NAME="mydb.sqlite";//æ•°æ®åº“åç§°
+	    private volatile static DaoManager manager;//å¤šçº¿ç¨‹è®¿é—®
 	    private static DaoMaster.DevOpenHelper helper;
 	    private static DaoMaster daoMaster;
 	    private static DaoSession daoSession;
 	    private Context context;
 
 	    /**
-	     * Ê¹ÓÃµ¥ÀıÄ£Ê½»ñµÃ²Ù×÷Êı¾İ¿âµÄ¶ÔÏó
+	     * ä½¿ç”¨å•ä¾‹æ¨¡å¼è·å¾—æ“ä½œæ•°æ®åº“çš„å¯¹è±¡
 	     * @return
 	     */
 	    public static DaoManager getInstance(){
@@ -130,7 +130,7 @@ public class User {
 		this.context = context;
 	    }
 	    /**
-	     * ÅĞ¶ÏÊÇ·ñ´æÔÚÊı¾İ¿â£¬Èç¹ûÃ»ÓĞÔò´´½¨Êı¾İ¿â
+	     * åˆ¤æ–­æ˜¯å¦å­˜åœ¨æ•°æ®åº“ï¼Œå¦‚æœæ²¡æœ‰åˆ™åˆ›å»ºæ•°æ®åº“
 	     * @return
 	     */
 	    public DaoMaster getDaoMaster(){
@@ -142,7 +142,7 @@ public class User {
 	    }
 
 	    /**
-	     * Íê³É¶ÔÊı¾İ¿âµÄÌí¼Ó£¬É¾³ı£¬ĞŞ¸Ä£¬²éÑ¯µÄ²Ù×÷£¬½ö½öÊÇÒ»¸ö½Ó¿Ú
+	     * å®Œæˆå¯¹æ•°æ®åº“çš„æ·»åŠ ï¼Œåˆ é™¤ï¼Œä¿®æ”¹ï¼ŒæŸ¥è¯¢çš„æ“ä½œï¼Œä»…ä»…æ˜¯ä¸€ä¸ªæ¥å£
 	     * @return
 	     */
 	    public DaoSession getDaoSession(){
@@ -156,7 +156,7 @@ public class User {
 	    }
 
 	    /**
-	     * ´ò¿ªÊä³öÈÕÖ¾µÄ²Ù×÷£¬Ä¬ÈÏÊÇ¹Ø±ÕµÄ
+	     * æ‰“å¼€è¾“å‡ºæ—¥å¿—çš„æ“ä½œï¼Œé»˜è®¤æ˜¯å…³é—­çš„
 	     */
 	    public void setDebug(){
 		QueryBuilder.LOG_SQL = true;
@@ -164,7 +164,7 @@ public class User {
 	    }
 
 	    /**
-	     * ¹Ø±ÕËùÓĞµÄ²Ù×÷£¬Êı¾İ¿â¿ªÆôµÄÊ±ºò£¬Ê¹ÓÃÍê±ÏÁË±ØĞëÒª¹Ø±Õ£¬·ñÔò»áÔì³É×ÊÔ´µÄÀË·Ñ
+	     * å…³é—­æ‰€æœ‰çš„æ“ä½œï¼Œæ•°æ®åº“å¼€å¯çš„æ—¶å€™ï¼Œä½¿ç”¨å®Œæ¯•äº†å¿…é¡»è¦å…³é—­ï¼Œå¦åˆ™ä¼šé€ æˆèµ„æºçš„æµªè´¹
 	     */
 	    public void closeConnection(){
 		closeHeloper();
@@ -185,7 +185,7 @@ public class User {
 	}
 }
 
-4.CommonUtilsÄÚÈİÎªĞèÒª¶ÔÊı¾İ¿â²Ù×÷Ê²Ã´¾ÍÔÚÆäÖĞĞ´Ê²Ã´ÄÚÈİÈç£º
+4.CommonUtilså†…å®¹ä¸ºéœ€è¦å¯¹æ•°æ®åº“æ“ä½œä»€ä¹ˆå°±åœ¨å…¶ä¸­å†™ä»€ä¹ˆå†…å®¹å¦‚ï¼š
 {
 	import android.content.Context;
 	import android.util.Log;
@@ -195,7 +195,7 @@ public class User {
 	import entity.User;
 
 	/**
-	 * Íê³É¶ÔÄ³Ò»ÕÅ±íµÄ¾ßÌå²Ù×÷£¬ORM ²Ù×÷µÄÊÇ¶ÔÏó£¬User
+	 * å®Œæˆå¯¹æŸä¸€å¼ è¡¨çš„å…·ä½“æ“ä½œï¼ŒORM æ“ä½œçš„æ˜¯å¯¹è±¡ï¼ŒUser
 	 */
 	public class CommonUtils {
 	    private DaoManager manager;
@@ -206,7 +206,7 @@ public class User {
 	    }
 
 	    /**
-	     * Íê³É¶ÔÊı¾İ¿âÖĞuser ±íµÄ²åÈë²Ù×÷
+	     * å®Œæˆå¯¹æ•°æ®åº“ä¸­user è¡¨çš„æ’å…¥æ“ä½œ
 	     * @param user
 	     * @return
 	     */
@@ -218,7 +218,7 @@ public class User {
 	    }
 
 	    /**
-	     * ²åÈë¶àÌõ¼ÇÂ¼£¬ĞèÒª¿ª±ÙĞÂµÄÏß³Ì
+	     * æ’å…¥å¤šæ¡è®°å½•ï¼Œéœ€è¦å¼€è¾Ÿæ–°çš„çº¿ç¨‹
 	     * @param users
 	     * @return
 	     */
@@ -241,7 +241,7 @@ public class User {
 	    }
 
 	    /**
-	     * Íê³É¶ÔUserµÄÄ³Ò»Ìõ¼ÇÂ¼µÄĞŞ¸Ä
+	     * å®Œæˆå¯¹Userçš„æŸä¸€æ¡è®°å½•çš„ä¿®æ”¹
 	     * @param user
 	     * @return
 	     */

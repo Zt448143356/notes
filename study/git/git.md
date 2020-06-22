@@ -99,9 +99,9 @@
 
 * `git checkout -b test` 创建并切换到test分支
 
-### `git branch -d (branchname)` 
+### `git branch -D (branchname)` 
 
-* `git branch -d test` 删除test分支
+* `git branch -D test` 删除test分支
 
 ### `git merge (branchname)` 
 
