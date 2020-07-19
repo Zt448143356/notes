@@ -1,5 +1,7 @@
 # JavaScript笔记（本笔记中的代码全部为strict模式下）
 
+> 本学习笔记基于<a href='https://www.liaoxuefeng.com/wiki/1022910821149312'>廖雪峰的js教程</a>记录
+
 ## 数据类型和变量
 
 ### Number
@@ -16,11 +18,11 @@ Infinity; // Infinity表示无限大，当数值超过了JavaScript的Number所�
 
 **Number可以直接做四则运算，规则和数学一致**
 
-### 字符串
+### 字符串（String）
 
 **字符串是以单引号'或双引号"括起来的任意文本，比如 ` ` 'abc' `  ` ， `  ` "xyz" ` ` 等等。**
 
-### 布尔值
+### 布尔值（Boolean）
 
 **只有两个值， `true`  `false` ，可以直接用 `true`  `false` 来表达，也可以通过布尔运算计算出来**
 
@@ -61,7 +63,7 @@ Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001; // true
 * `null` 表示一个“空”的值，它和 `0` 以及空字符串 `''` 不同， `0` 是一个数值， `''` 表示长度为0的字符串，而 `null` 表示“空”。
 * `undefined` 仅仅在判断函数参数是否传递的情况下有用。
 
-### 数组
+### 数组（Array）
 
 **JavaScript的数组和其他语言不同，JavaScript的数组可以包括任意数据类型**
 
@@ -90,7 +92,7 @@ arr[5]; // 返回索引为5的元素，即true
 arr[6]; // 索引超出了范围，返回undefined
 ```
 
-### 对象
+### 对象（Object）
 
 JavaScript的对象是一组由键-值组成的无序集合：
 
@@ -111,6 +113,15 @@ var person = {
 person.name; // 'Bob'
 person.zipcode; // null
 ```
+
+### Symbol
+
+`Symbol()`函数会返回`symbol`类型的值，该类型具有静态属性和静态方法。它的静态属性会暴露几个内建的成员对象；它的静态方法会暴露全局的`symbol`注册，且类似于内建对象类，但作为构造函数来说它并不完整，因为它不支持语法："`new Symbol()`"。
+
+| 摘录于<a href='https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol'>MDN</a>
+
+
+每个从`Symbol()`返回的symbol值都是唯一的。一个symbol值能作为对象属性的标识符
 
 ### 变量
 
