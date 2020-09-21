@@ -2007,7 +2007,7 @@ a; //1546308610000
 * `\w` 可以匹配一个字母或数字
 * `.` 可以匹配任意字符
 * `*` 表示任意个字符（包括0个）
-* ** `+` 表示至少一个字符**
+* `+` 表示至少一个字符
 * `?` 表示0个或1个字符
 * `{n}` 表示n个字符
 * `{n,m}` 表示n-m个字符
@@ -2244,11 +2244,6 @@ LoveCat.prototype.getAge = function() {
     return this.age;
 };
 
-function LoveCat(cat) {
-    // 调用Cat构造函数，绑定this变量:
-    Cat.call(this, cat);
-    this.age = cat.age;
-}
 var kitty = new LoveCat({
     name: 'Kitty',
     age: 10
