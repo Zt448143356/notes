@@ -1,5 +1,15 @@
 # Vue.js笔记
 
+## 查看Vue的版本
+
+1. 查看package.json文件
+
+2. 终端查看
+
+    - 查看vue-cli版本号`vue -V`
+    - 全局查看vue的版本号`npm info vue`
+    - 局部（当前项目）查看vue的版本号`npm list vue version`
+
 ## 什么是Vue.js
 
 * Vue.js 是前端的主流框架之一，和Angular.js、React.js 一起，并成为前端三大主流框架！
