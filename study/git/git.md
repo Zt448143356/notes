@@ -166,9 +166,31 @@
 
 * `git stash clear` ：删除所有缓存的 `stash` 
 
+## git fork同步原库
 
+1. git remote add upstream Url（同步原作者的git）
+    + 这里的`upstream`是可以修改名称的，代表 fork 源仓库的别名
+`git remote add upstream https://github.com/alibaba/butterfly.git`
 
+2. git remote -v (查看本地仓库关联的远程地址)
 
+```
+origin  git@github.com:Zt448143356/butterfly.git (fetch)
+origin  git@github.com:Zt448143356/butterfly.git (push)
+upstream        https://github.com/alibaba/butterfly.git (fetch)
+upstream        https://github.com/alibaba/butterfly.git (push)
+```
+
+3. 拉取源库
+
+```
+git fetch upstream
+git merge upstream/master
+
+or
+
+git pull upstream
+```
 
 
 

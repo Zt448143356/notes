@@ -414,9 +414,69 @@ function Example() {
 ```
 
 
-
 #### Effect Hook
 
++ `Effect Hook` 可以让你在函数组件中执行副作用操作
+
++ 如果你熟悉 `React class` 的生命周期函数，你可以把 `useEffect Hook` 看做 `componentDidMount`，`componentDidUpdate` 和 `componentWillUnmount` 这三个函数的组合。
+
+``` jsx
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+  componentDidUpdate() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+等价
+
+``` jsx
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
++ `useEffect`第二个参数：
+    - 不给：相当于生命周期的 `componentDidMount` 和 `componentDidUpdate`
+    - `[]`：相当于生命周期的 `componentDidMount`
+    - `[count]`：只有count发生改变的时候，才会触发 `componentDidUpdate`
+    - `return`： 相当于 `componentWillUnmount`
 
 # React-Router
 
