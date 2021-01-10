@@ -574,3 +574,382 @@ swim(tom);
 
 + 将 any 断言为一个具体的类型
 
+### 双重断言
+
++ 任何类型都可以被断言为 any
++ any 可以被断言为任何类型
+
+那么我们可以使用双重断言 `as any as Foo` 来将任何一个类型断言为任何另一个类型。
+
+``` TS
+interface Cat {
+    run(): void;
+}
+interface Fish {
+    swim(): void;
+}
+
+function testCat(cat: Cat) {
+    return (cat as any as Fish);
+}
+```
+
+### 类型断言 vs 类型转换
+
+类型断言只会影响 TypeScript 编译时的类型，类型断言语句在编译结果中会被删除
+
+``` TS
+function toBoolean(something: any): boolean {
+    return something as boolean;
+}
+
+toBoolean(1);//1
+
+//编译后
+
+function toBoolean(something) {
+    return something;
+}
+
+toBoolean(1);//1
+
+//所以类型断言不是类型转换，它不会真的影响到变量的类型。
+
+//若要进行类型转换，需要直接调用类型转换的方法：
+
+function toBoolean(something: any): boolean {
+    return Boolean(something);
+}
+
+toBoolean(1);
+// 返回值为 true
+```
+
+### 类型断言 vs 类型声明
+
++ 类型声明是比类型断言更加严格,所以为了增加代码的质量，我们最好优先使用类型声明
+
+``` TS
+//方法一（类型断言）
+function getCacheData(key: string): any {
+    return (window as any).cache[key];
+}
+
+interface Cat {
+    name: string;
+    run(): void;
+}
+
+const tom = getCacheData('tom') as Cat;
+tom.run();
+
+//方法二（）类型申明    
+function getCacheData(key: string): any {
+    return (window as any).cache[key];
+}
+
+interface Cat {
+    name: string;
+    run(): void;
+}
+
+const tom: Cat = getCacheData('tom');
+tom.run();
+```
+
+方法一和方法二的效果基本一模一样。
+
+区别：
+``` TS
+//断言
+interface Animal {
+    name: string;
+}
+interface Cat {
+    name: string;
+    run(): void;
+}
+
+const animal: Animal = {
+    name: 'tom'
+};
+let tom = animal as Cat;
+
+//申明
+
+interface Animal {
+    name: string;
+}
+interface Cat {
+    name: string;
+    run(): void;
+}
+
+const animal: Animal = {
+    name: 'tom'
+};
+let tom: Cat = animal;
+//Property 'run' is missing in type 'Animal' but required in type 'Cat'.
+```
+
+这很容易理解，`Animal` 可以看作是 `Cat` 的父类，当然不能将父类的实例赋值给类型为子类的变量。
+
++ `animal` 断言为 `Cat`，只需要满足 `Animal` 兼容 `Cat` 或 `Cat` 兼容 `Animal` 即可
+
++ `animal` 赋值给 `tom`，需要满足 `Cat` 兼容 `Animal` 才行
+
+### 类型断言 vs 泛型
+
+``` TS
+//第三种（泛型）
+function getCacheData<T>(key: string): T {
+    return (window as any).cache[key];
+}
+
+interface Cat {
+    name: string;
+    run(): void;
+}
+
+const tom = getCacheData<Cat>('tom');
+tom.run();
+```
+
+## 申明文件
+
+## 内置对象
+``` TS
+
+```
+``` TS
+
+```
+``` TS
+
+```
+``` TS
+
+```
+
+
+# 进阶
+
+## 类型别名
+
+类型别名用来给一个类型起个新名字。
+
+### 例子
+
+下例中，我们使用 `type` 创建类型别名。
+
+``` TS
+type Name = string;
+type NameResolver = () => string;
+type NameOrResolver = Name | NameResolver;
+function getName(n: NameOrResolver): Name {
+    if (typeof n === 'string') {
+        return n;
+    } else {
+        return n();
+    }
+}
+```
+
+## 字符串字面量类型
+
+字符串字面量类型用来约束取值只能是某几个字符串中的一个。
+
+### 例子
+
+下例中，我们使用 `type` 定了一个字符串字面量类型 `EventNames`，它只能取三种字符串中的一种。
+
+注意，类型别名与字符串字面量类型都是使用 `type` 进行定义。
+
+``` TS
+type EventNames = 'click' | 'scroll' | 'mousemove';
+function handleEvent(ele: Element, event: EventNames) {
+    // do something
+}
+
+handleEvent(document.getElementById('hello'), 'scroll');  // 没问题
+handleEvent(document.getElementById('world'), 'dblclick'); // 报错，event 不能为 'dblclick'
+```
+
+## 元组
+
+数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象。
+
+### 例子
+
+``` TS
+//可以单独赋值一项
+let tom: [string, number];
+tom[0] = 'Tom';
+tom[1] = 25;
+//但是当直接对元组类型的变量进行初始化或者赋值的时候，需要提供所有元组类型中指定的项
+
+let tom: [string, number];
+tom = ['Tom', 25];
+
+let tom: [string, number];
+tom = ['Tom'];
+//Property '1' is missing in type '[string]' but required in type '[string, number]'.
+```
+
+### 越界的元素
+
+当添加越界的元素时，它的类型会被限制为元组中每个类型的联合类型
+
+``` TS
+let tom: [string, number];
+tom = ['Tom', 25];
+tom.push('male');
+tom.push(true);
+
+// Argument of type 'true' is not assignable to parameter of type 'string | number'.
+```
+
+## 枚举
+
+枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。
+
+### 例子
+
+``` TS
+enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+
+console.log(Days["Sun"] === 0); // true
+console.log(Days["Mon"] === 1); // true
+console.log(Days["Tue"] === 2); // true
+console.log(Days["Sat"] === 6); // true
+
+console.log(Days[0] === "Sun"); // true
+console.log(Days[1] === "Mon"); // true
+console.log(Days[2] === "Tue"); // true
+console.log(Days[6] === "Sat"); // true
+```
+
++ 待续
+
+## 类
+
+### 简介
+
++ 类（Class）：定义了一件事物的抽象特点，包含它的属性和方法
++ 对象（Object）：类的实例，通过 new 生成
++ 面向对象（OOP）的三大特性：封装、继承、多态
++ 封装（Encapsulation）：将对数据的操作细节隐藏起来，只暴露对外的接口。外界调用端不需要（也不可能）知道细节，就能通过对外提供的接口来访问该对象，同时也保证了外界无法任意更改对象内部的数据
++ 继承（Inheritance）：子类继承父类，子类除了拥有父类的所有特性外，还有一些更具体的特性
++ 多态（Polymorphism）：由继承而产生了相关的不同的类，对同一个方法可以有不同的响应。比如 Cat 和 Dog 都继承自 Animal，但是分别实现了自己的 eat 方法。此时针对某一个实例，我们无需了解它是 Cat 还是 Dog，就可以直接调用 eat 方法，程序会自动判断出来应该如何执行 eat
++ 存取器（getter & setter）：用以改变属性的读取和赋值行为
++ 修饰符（Modifiers）：修饰符是一些关键字，用于限定成员或类型的性质。比如 public 表示公有属性或方法
++ 抽象类（Abstract Class）：抽象类是供其他类继承的基类，抽象类不允许被实例化。抽象类中的抽象方法必须在子类中被实现
++ 接口（Interfaces）：不同类之间公有的属性或方法，可以抽象成一个接口。接口可以被类实现（implements）。一个类只能继承自另一个类，但是可以实现多个接口
+
+### 简述类用法
+
+#### 属性方法 
+
+使用 `class` 定义类，使用 `constructor` 定义构造函数。
+
+通过 `new` 生成新实例的时候，会自动调用构造函数。
+
+``` JS
+class Animal {
+    public name;
+    constructor(name) {
+        this.name = name;
+    }
+    sayHi() {
+        return `My name is ${this.name}`;
+    }
+}
+
+let a = new Animal('Jack');
+console.log(a.sayHi()); // My name is Jack
+```
+
+#### 继承
+
+使用 `extends` 关键字实现继承，子类中使用 `super` 关键字来调用父类的构造函数和方法。
+
+``` JS
+class Cat extends Animal {
+  constructor(name) {
+    super(name); // 调用父类的 constructor(name)
+    console.log(this.name);
+  }
+  sayHi() {
+    return 'Meow, ' + super.sayHi(); // 调用父类的 sayHi()
+  }
+}
+
+let c = new Cat('Tom'); // Tom
+console.log(c.sayHi()); // Meow, My name is Tom
+```
+
+#### 存储器
+
+使用 getter 和 setter 可以改变属性的赋值和读取行为
+
+``` JS
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  get name() {
+    return 'Jack';
+  }
+  set name(value) {
+    console.log('setter: ' + value + '!');
+  }
+}
+
+let a = new Animal('Kitty'); // setter: Kitty!
+a.name = 'Tom'; // setter: Tom!
+console.log(a.name); // Jack
+```
+
+#### 静态方法
+
+使用 `static` 修饰符修饰的方法称为静态方法，它们不需要实例化，而是直接通过类来调用
+
+``` JS
+class Animal {
+  static isAnimal(a) {
+    return a instanceof Animal;
+  }
+}
+
+let a = new Animal('Jack');
+Animal.isAnimal(a); // true
+a.isAnimal(a); // TypeError: a.isAnimal is not a function
+```
+
+### TypeScript 中类的用法
+
+TypeScript 可以使用三种访问修饰符（Access Modifiers），分别是 `public`、`private` 和 `protected`
+
++ `public` 修饰的属性或方法是公有的，可以在任何地方被访问到，默认所有的属性和方法都是 `public` 的
++ `private` 修饰的属性或方法是私有的，不能在声明它的类的外部访问
++ `protected` 修饰的属性或方法是受保护的，它和 `private` 类似，区别是它在子类中也是允许被访问的
+
+``` TS
+
+```
+``` TS
+
+```
+``` TS
+
+```
+``` TS
+
+```
+
+
+## 泛型
+
+泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。
+
+
