@@ -92,7 +92,7 @@ function deepClone(obj){
   //保持克隆结果和传入克隆对象有相同的所属类
   let newObj = new obj.constructor;
   for(let key in obj){
-    if (obj.hasOwnProrerty(key)) {
+    if (obj.hasOwnProperty(key)) {
       newObj[key] = deepClone(obj[key])
     }
   }
