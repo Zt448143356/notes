@@ -38,3 +38,7 @@
 `npm publish`
 
 发布一个包到`npm`上
+
+### tnpm pack && tar -xvzf *.tgz && rm -rf package *.tgz
+
+检查本次发布会发那些文件
